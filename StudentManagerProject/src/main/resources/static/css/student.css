@@ -1,0 +1,9 @@
+.fixed-bottom-nav {
+    position: fixed;
+    bottom: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 1000; /* Adjust z-index as needed */
+    padding: 10px; /* Adjust padding as needed */
+}

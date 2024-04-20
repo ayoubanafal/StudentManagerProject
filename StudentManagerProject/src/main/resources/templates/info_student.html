@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+    <a class="navbar-brand" href="#">Student Management System</a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/students}">Student Management</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Student information</h1>
+                    <form th:action="@{/students1/{id}(id=${student.id})}" th:object="${student}" method="POST">
+                        <div class="form-group">
+                            <label for="firstName">Student First Name</label>
+                            <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
+                                   class="form-control" placeholder="Enter Student First Name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Student Last Name</label>
+                            <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
+                                   class="form-control" placeholder="Enter Student Last Name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Student Email</label>
+                            <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
+                                   placeholder="Enter Student Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Student parents Number</label>
+                            <input type="text" id="parentsNumber" name="parents Number" th:field="*{parentsNumber}" class="form-control"
+                                   placeholder="0"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Student first Semester Grade</label>
+                            <input type="text" id="firstSemesterGrade" name="first Semester Grade" th:field="*{firstSemesterGrade}" class="form-control"
+                                   placeholder="0"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Student second Semester Grade</label>
+                            <input type="text" id="secondSemesterGrade" name="second Semester Grade" th:field="*{secondSemesterGrade}" class="form-control"
+                                   placeholder="0"/>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (Optional, if needed) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
