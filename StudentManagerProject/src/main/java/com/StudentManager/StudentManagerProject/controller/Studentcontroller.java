@@ -26,7 +26,7 @@ public class Studentcontroller {
                                @RequestParam(name = "Search", defaultValue = "") String kw,
                                @RequestParam(name = "size", defaultValue = "2") int size,
                                @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<Student> pageStudents = studentManager.findStudentByFirstName(kw, page, size);
+        Page<Student> pageStudents = studentManager.findStudentByFirstNameOrLastNameOrEmail(kw, page, size);
         model.addAttribute("students",pageStudents.getContent());
         System.out.println("---------------------------");
         System.out.println(pageStudents.getTotalPages());

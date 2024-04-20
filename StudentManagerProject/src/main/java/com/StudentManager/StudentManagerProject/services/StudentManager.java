@@ -15,5 +15,6 @@ public interface StudentManager {
     public Student updateStudent(Student student);
 
     public void deleteStudentById(Long id);
-    Page<Student> findStudentByFirstName(String kw , int page , int size);
+    //Page<Student> findStudentByFirstName(String kw , int page , int size);
+    public  Page<Student> findStudentByFirstNameOrLastNameOrEmail(String kw , int page , int size);
 }

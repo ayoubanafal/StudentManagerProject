@@ -44,9 +44,9 @@ public class StudentService implements StudentManager {
     }
 
     @Override
-    public Page<Student> findStudentByFirstName(String kw , int size , int page)
+    public Page<Student> findStudentByFirstNameOrLastNameOrEmail(String kw , int size , int page)
     {
-        return studentRepository.findStudentByFirstNameContaining(kw,PageRequest.of(size,page));
+        return studentRepository.findByFirstNameContainingOrLastNameContainingOrEmailContaining(kw,kw,kw,PageRequest.of(size,page));
     }
 
 }
