@@ -21,6 +21,9 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/students}">Student Management</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -33,21 +36,36 @@
                     <h1 class="card-title text-center">Update Student</h1>
                     <form th:action="@{/students/{id}(id=${student.id})}" th:object="${student}" method="POST">
                         <div class="form-group">
-                            <label for="firstName">Student First Name</label>
+                            <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" th:field="*{firstName}"
                                    class="form-control" placeholder="Enter Student First Name"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="lastName">Student Last Name</label>
+                            <label for="lastName">Last Name</label>
                             <input type="text" id="lastName" name="lastName" th:field="*{lastName}"
                                    class="form-control" placeholder="Enter Student Last Name"/>
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Student Email</label>
+                            <label for="email">Email</label>
                             <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
-                                   placeholder="Enter Student Email"/>
+                                   placeholder="Email@gmail.com"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Parents Number</label>
+                            <input type="text" id="parentsNumber" name="ParentsNumber" th:field="*{parentsNumber}" class="form-control"
+                                   placeholder="0000 0000 00"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">First Semester Grade</label>
+                            <input type="text" id="firstSemesterGrade" name="firstSemesterGrade" th:field="*{firstSemesterGrade}" class="form-control"
+                                   placeholder="--"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Second Semester Grade</label>
+                            <input type="text" id="secondSemesterGrade" name="secondSemesterGrade" th:field="*{secondSemesterGrade}" class="form-control"
+                                   placeholder="--"/>
                         </div>
 
                         <div class="form-group text-center">
