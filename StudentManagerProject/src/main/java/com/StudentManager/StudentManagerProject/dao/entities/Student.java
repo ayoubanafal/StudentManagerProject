@@ -3,6 +3,8 @@ package com.StudentManager.StudentManagerProject.dao.entities;
 import com.sun.jdi.LongValue;
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
 @Table(name = "students")
 public class Student {
@@ -24,6 +26,8 @@ public class Student {
 
     @Column(name = "second_semester_grade", columnDefinition = "bigint default 0")
     private Long secondSemesterGrade=0L;
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+    private Collection<Absence> absences;
 
     public Student() {}
     public Student(String firstName, String lastName, String email,String parentsNumber,Long firstSemesterGrade,Long secondSemesterGrade) {

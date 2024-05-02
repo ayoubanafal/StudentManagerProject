@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/student.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -20,7 +21,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/students}">Student Management</a>
+                <a class="nav-link" th:href="@{/students}">Students</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
@@ -31,12 +32,12 @@
 
 <div class="container-lg">
     <div class="row">
-        <h1>List Students</h1>
+        <h1>Students List</h1>
     </div>
 
 
         <div class="d-flex justify-content-around">
-            <div class="col-lg-3">
+            <div class="col-lg">
                 <a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus"></i> New Student</a>
                 <a th:href="@{/exportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
             </div>
@@ -59,7 +60,7 @@
             <th>Student First Name</th>
             <th>Student Last Name</th>
             <th>Student Email</th>
-            <th>Actions</th>
+            <th sec:authorize="hasRole('super')" style="width: 15%;">Actions</th>
         </tr>
         </thead>
 
@@ -68,15 +69,16 @@
             <td th:text="${student.firstName}"></td>
             <td th:text="${student.lastName}"></td>
             <td th:text="${student.email}"></td>
-            <td>
+            <td sec:authorize="hasRole('super')" style="text-align: center;">
                 <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary btn-sm">
                     <i class="fas fa-pencil-alt fa-xs"></i>
                 </a>
-
+                <a th:href="@{/studentsAbsence/{id}(id=${student.id})}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-clipboard fa-s"></i>
+                </a>
                 <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash-alt fa-xs"></i>
                 </a>
-
             </td>
         </tr>
         </tbody>
