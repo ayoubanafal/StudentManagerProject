@@ -26,8 +26,16 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/teachers}">Teachers</a>
+            </li>
         </ul>
     </div>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/logout}" >Logout</a>
+        </li>
+    </ul>
 </nav>
 
 <div class="container-lg">
@@ -38,7 +46,7 @@
 
         <div class="d-flex justify-content-around">
             <div class="col-lg">
-                <a th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus"></i> New Student</a>
+                <a sec:authorize="hasRole('super')" th:href="@{/students/new}" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus"></i> New Student</a>
                 <a th:href="@{/exportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
             </div>
             <div class="col-lg-3">
@@ -60,7 +68,7 @@
             <th>Student First Name</th>
             <th>Student Last Name</th>
             <th>Student Email</th>
-            <th sec:authorize="hasRole('super')" style="width: 15%;">Actions</th>
+            <th style="width: 15%;">Actions</th>
         </tr>
         </thead>
 
@@ -69,14 +77,14 @@
             <td th:text="${student.firstName}"></td>
             <td th:text="${student.lastName}"></td>
             <td th:text="${student.email}"></td>
-            <td sec:authorize="hasRole('super')" style="text-align: center;">
-                <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary btn-sm">
+            <td  style="text-align: center;">
+                <a sec:authorize="hasRole('super')" th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary btn-sm">
                     <i class="fas fa-pencil-alt fa-xs"></i>
                 </a>
                 <a th:href="@{/studentsAbsence/{id}(id=${student.id})}" class="btn btn-secondary btn-sm">
                     <i class="fas fa-clipboard fa-s"></i>
                 </a>
-                <a th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
+                <a sec:authorize="hasRole('super')" th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash-alt fa-xs"></i>
                 </a>
             </td>

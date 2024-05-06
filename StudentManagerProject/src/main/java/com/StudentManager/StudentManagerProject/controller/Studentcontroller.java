@@ -70,8 +70,7 @@ public class Studentcontroller {
 
     @PostMapping("/students/{id}")
     public String updateStudent(@PathVariable Long id,
-                                @ModelAttribute("student") Student student,
-                                Model model) {
+                                @ModelAttribute("student") Student student) {
 
         Student existingStudent = studentManager.getStudentById(id);
         existingStudent.setId(id);

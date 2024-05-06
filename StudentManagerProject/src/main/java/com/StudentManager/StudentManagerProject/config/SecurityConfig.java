@@ -24,13 +24,16 @@ public class SecurityConfig {
         http
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/students", "/deletedStudents","/studentsAbsence").authenticated()
+                        .requestMatchers("/students", "/deletedStudents","/studentsAbsence","teachers").authenticated()
                         .requestMatchers("/login", "/", "/webjars/**","/**").permitAll())
                 //.formLogin((form -> form.loginPage("/loginpage").permitAll()))
                 .formLogin(Customizer.withDefaults())
-                .formLogin(formlogin->
-                        formlogin.defaultSuccessUrl("/students"))
-
+                .formLogin(formlogin->formlogin
+                                .permitAll()
+                        .defaultSuccessUrl("/students"))
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login")
+                )
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
@@ -38,16 +41,14 @@ public class SecurityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails ayoubs = User.withUsername("ayoubs")
-                .password("12345")
+                .password("1")
                 .roles("super")
-                //.roles("admin")
                 .build();
-        UserDetails admin = User.withUsername("admin")
-                .password("12345")
-                //.authorities("admin")
-                .roles("admin")
+        UserDetails user = User.withUsername("user")
+                .password("1")
+                .roles("user")
                 .build();
-        return new InMemoryUserDetailsManager(ayoubs, admin);
+        return new InMemoryUserDetailsManager(ayoubs, user);
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

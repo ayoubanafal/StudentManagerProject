@@ -24,8 +24,16 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/teachers}">Teachers</a>
+            </li>
         </ul>
     </div>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/logout}" >Logout</a>
+        </li>
+    </ul>
 </nav>
 <br><br>
 <div class="container">
@@ -48,11 +56,21 @@
                                    class="form-control" placeholder="Enter Reason"/>
                         </div>
 
+<!--                        <div class="form-group">-->
+<!--                            <label for="missedClass">Missed Class</label>-->
+<!--                            <input type="text" id="missedClass" name="missedClass" th:field="*{missedClass}" class="form-control"-->
+<!--                                   placeholder="Missed Class"/>-->
+<!--                        </div>-->
                         <div class="form-group">
                             <label for="missedClass">Missed Class</label>
-                            <input type="text" id="missedClass" name="missedClass" th:field="*{missedClass}" class="form-control"
-                                   placeholder="Missed Class"/>
+                            <select id="missedClass" name="missedClass" th:field="*{missedClass}" class="form-control" required>
+                                <option value="">Select Class</option>
+                                <option value="Math">Math</option>
+                                <option value="Programming">Programming</option>
+                            </select>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('missedClass')}" th:errors="*{missedClass}">Please select a class</small>
                         </div>
+
 
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>

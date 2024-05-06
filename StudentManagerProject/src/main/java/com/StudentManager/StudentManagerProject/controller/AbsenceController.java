@@ -1,6 +1,7 @@
 package com.StudentManager.StudentManagerProject.controller;
 
 import com.StudentManager.StudentManagerProject.dao.entities.Absence;
+import com.StudentManager.StudentManagerProject.dao.entities.DeletedStudent;
 import com.StudentManager.StudentManagerProject.dao.entities.Student;
 import com.StudentManager.StudentManagerProject.services.AbsenceManager;
 import com.StudentManager.StudentManagerProject.services.StudentManager;
@@ -74,7 +75,7 @@ public class AbsenceController {
         return "edit_absence";
     }
     @PostMapping("/studentsAbsence/edit/{id}")
-    public String updateStudent(@PathVariable Long id,
+    public String updateAbsence(@PathVariable Long id,
                                 @ModelAttribute("absence") Absence absence) {
 
         Absence existingAbsence = absenceManager.getAbsenceById(id);
@@ -84,6 +85,14 @@ public class AbsenceController {
         existingAbsence.setDate(absence.getDate());
         absenceManager.updateAbsence(existingAbsence);
         return "redirect:/studentsAbsence/"+ id;
+    }
+    /////// delete
+    @GetMapping("/studentsAbsence/delete/{id}")
+    public String DAbsence1(@PathVariable Long id) {
+        Absence abs=absenceManager.getAbsenceById(id);
+        Long ids=abs.getStudent().getId();
+        absenceManager.deleteAbsenceById(id);
+        return "redirect:/studentsAbsence/"+ ids;
     }
 
     //////export

@@ -7,6 +7,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepository extends JpaRepository<Student,Long> {
-//public Page<Student> findStudentByFirstNameContaining(String kw,PageRequest pageable);
     public Page<Student> findByFirstNameContainingOrLastNameContainingOrEmailContaining(String firstName , String LastName , String Email , Pageable pageable);
 }
