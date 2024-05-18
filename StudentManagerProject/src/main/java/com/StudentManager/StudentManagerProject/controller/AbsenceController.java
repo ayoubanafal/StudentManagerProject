@@ -1,8 +1,6 @@
 package com.StudentManager.StudentManagerProject.controller;
 
 import com.StudentManager.StudentManagerProject.dao.entities.Absence;
-import com.StudentManager.StudentManagerProject.dao.entities.DeletedStudent;
-import com.StudentManager.StudentManagerProject.dao.entities.Student;
 import com.StudentManager.StudentManagerProject.services.AbsenceManager;
 import com.StudentManager.StudentManagerProject.services.StudentManager;
 import com.opencsv.CSVWriter;
@@ -11,14 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -46,7 +39,8 @@ public class AbsenceController {
         model.addAttribute("currentPage", page);
         model.addAttribute("id", id);
         model.addAttribute("Search",kw);
-        return "studentsAbsence";
+//        return "studentsAbsence";
+        return "studentAbsenceB";
     }
 
     ///////////new

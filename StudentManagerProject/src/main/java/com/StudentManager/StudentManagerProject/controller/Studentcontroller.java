@@ -31,6 +31,31 @@ public class Studentcontroller {
         this.deletedStudentManager = deletedStudentManager;
     }
 
+    @GetMapping("/test")//2
+    public String listTest(Model model,
+                           @RequestParam(name = "Search", defaultValue = "") String kw,
+                           @RequestParam(name = "size", defaultValue = "4") int size,
+                           @RequestParam(name = "page", defaultValue = "0") int page) {
+        //List<Student> students = studentManager.getAllStudents();
+        //model.addAttribute("students", students);
+        Student student = new Student();
+        model.addAttribute("student", student);
+        model.addAttribute("studentEdit", student);
+
+        Page<Student> pageStudents = studentManager.findStudentByFirstNameOrLastNameOrEmail(kw, page, size);
+        model.addAttribute("students",pageStudents.getContent());
+        System.out.println("---------------------------");
+        System.out.println(pageStudents.getTotalPages());
+        System.out.println("---------------------------");
+        model.addAttribute("pages",new int[pageStudents.getTotalPages()]);
+        model.addAttribute("Tpages",pageStudents.getTotalPages());
+        model.addAttribute("currentPage",page);
+        model.addAttribute("Search",kw);
+        return "test";
+    }
+
+
+
     @GetMapping("/students")
     public String listStudents(Model model,
                                @RequestParam(name = "Search", defaultValue = "") String kw,
@@ -48,18 +73,25 @@ public class Studentcontroller {
         return "students";
     }
 ////new
-    @GetMapping("/students/new")
+    @GetMapping("/students22")//2
     public String createStudentForm(Model model) {
+        List<Student> students = studentManager.getAllStudents();
+        model.addAttribute("students", students);
         Student student = new Student();
         model.addAttribute("student", student);
-        return "create_student";
-
+        model.addAttribute("studentEdit", student);
+        return "test";
     }
 
     @PostMapping("/students")
     public String saveStudent(@ModelAttribute("student") Student student) {
         studentManager.saveStudent(student);
         return "redirect:/students";
+    }
+    @PostMapping("/students2")//2
+    public String saveStudents(@ModelAttribute("student") Student student) {
+        studentManager.saveStudent(student);
+        return "redirect:/test";
     }
 //////updating
     @GetMapping("/students/edit/{id}")
@@ -82,6 +114,27 @@ public class Studentcontroller {
         existingStudent.setSecondSemesterGrade(student.getSecondSemesterGrade());
         studentManager.updateStudent(existingStudent);
         return "redirect:/students";
+    }
+    @GetMapping("/students2/edit/{id}")///2
+    public String editStudentForm2(@PathVariable Long id, Model model) {
+        model.addAttribute("studentEdit", studentManager.getStudentById(id));
+
+        return "redirect:/students2/"+id;
+    }
+    @PostMapping("/students2/{id}")///2
+    public String updateStudent2(@PathVariable Long id,
+                                @ModelAttribute("studentEdit") Student student) {
+
+        Student existingStudent = studentManager.getStudentById(id);
+        existingStudent.setId(id);
+        existingStudent.setFirstName(student.getFirstName());
+        existingStudent.setLastName(student.getLastName());
+        existingStudent.setEmail(student.getEmail());
+        existingStudent.setParentsNumber(student.getParentsNumber());
+        existingStudent.setFirstSemesterGrade(student.getFirstSemesterGrade());
+        existingStudent.setSecondSemesterGrade(student.getSecondSemesterGrade());
+        studentManager.updateStudent(existingStudent);
+        return "redirect:/test";
     }
 ////////////delete
     @GetMapping("/students/delete/{id}")

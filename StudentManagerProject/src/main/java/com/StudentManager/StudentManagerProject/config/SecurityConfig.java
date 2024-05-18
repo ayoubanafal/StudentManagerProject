@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .formLogin(formlogin->formlogin
                                 .permitAll()
-                        .defaultSuccessUrl("/students"))
+                        //.defaultSuccessUrl("/students"))
+                .defaultSuccessUrl("/test"))
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login")
                 )

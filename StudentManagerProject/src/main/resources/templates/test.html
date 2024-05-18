@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SchoolManager - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, school , management">
+    <meta name="author" content="Ayoub Anafal - Bootstrap Admin Template">
+    <title>School Manager</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/line-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/material.css">
+
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left">
+                <a class="logo"><img src="assets/img/img_1.png" alt="Logo" width="45" height="45" ></a>
+                <a class="logo collapse-logo"><img src="assets/img/img_1.png" width="20" height="20" alt="Logo"></a>
+                <a class="logo2"><img src="assets/img/img_1.png" width="40" height="40" alt="Logo"></a>
+            </div>
+
+            <a id="toggle_btn" href="javascript:void(0);">
+<span class="bar-icon">
+<span></span>
+<span></span>
+<span></span>
+</span>
+</a>
+
+            <div class="page-title-box">
+                <h3>School Manager</h3>
+            </div>
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa-solid fa-bars"></i></a>
+
+            <ul class="nav user-menu">
+
+                <li class="nav-item">
+                    <div class="top-nav-search">
+                        <a href="javascript:void(0);" class="responsive-search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2"
+                                   type="search"
+                                   placeholder="Search"
+                                   aria-label="Search"
+                                   name="Search"
+                                   th:value="${Search}">
+                            <br>
+                            <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <span class="user-img"><img src="assets/img/avatar/avatar-27.jpg" alt="User Image">
+                    <span class="status online"></span></span>
+                    <span>Admin</span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+
+            <div class="dropdown mobile-user-menu">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="index.html">Logout</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <nav class="greedys sidebar-horizantal">
+                        <ul >
+                            <li class="menu-title">
+                                <span>Main</span>
+                            </li>
+                            <li class="submenu">
+                                <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                                    <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
+                                    <li><a href="deals-dashboard.html">Deals Dashboard</a></li>
+                                    <li><a href="leads-dashboard.html">Leads Dashboard</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="chat.html">Chat</a></li>
+                                    <li class="submenu">
+                                        <a href="#"><span> Calls</span> <span class="menu-arrow"></span></a>
+                                        <ul>
+                                            <li><a href="voice-call.html">Voice Call</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="events.html">Calendar</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-title">
+                                <span>Students</span>
+                            </li>
+                            <li class="submenu">
+                                <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a th:href="@{/test}">All Students</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-title">
+                                <span>Teachers</span>
+                            </li>
+                            <li class="submenu">
+                                <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
+                                <ul>
+
+                                    <li><a th:href="@{/teachers}">All Teachers</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <button class="viewmoremenu">More Menu</button>
+
+                    </nav>
+
+                    <ul class="sidebar-vertical">
+                        <li class="menu-title">
+                            <span>Main</span>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
+                                <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
+                                <li><a href="deals-dashboard.html">Deals Dashboard</a></li>
+                                <li><a href="leads-dashboard.html">Leads Dashboard</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="chat.html">Chat</a></li>
+                                <li class="submenu">
+                                    <a href="#"><span> Calls</span> <span class="menu-arrow"></span></a>
+                                    <ul>
+                                        <li><a href="voice-call.html">Voice Call</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="events.html">Calendar</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-title">
+                            <span>Students</span>
+                        </li>
+                        <li class="submenu">
+                            <a th:href="@{/test}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                            <ul>
+
+                                <li><a th:href="@{/test}">All Students</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-title">
+                            <span>Teachers</span>
+                        </li>
+                        <li class="submenu">
+                            <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
+                            <ul>
+
+                                <li><a th:href="@{/teachers}">All Teachers</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-wrapper">
+
+            <div class="content container-fluid">
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Students List</h3>
+                            <a th:href="@{/exportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+                        </div>
+                        <div class="col-auto float-end ms-auto">
+                            <a sec:authorize="hasRole('super')" th:href="@{/students22}" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_student"><i class="fa-solid fa-plus"></i> Add Student</a>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;">Student First Name</th>
+                                    <th style="text-align: center;">Student Last Name</th>
+                                    <th style="text-align: center;">Student Email</th>
+                                    <th style="text-align: center;">Student Parents Number</th>
+                                    <th style="text-align: center;">Student First Semester Grade</th>
+                                    <th style="text-align: center;">Student Second Semester Grade</th>
+                                    <th style="text-align: center;">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="student : ${students}">
+                                    <td th:text="${student.getFirstName()}" style="text-align: center;">First Name</td>
+                                    <td th:text="${student.getLastName()}" style="text-align: center;">Last Name</td>
+                                    <td th:text="${student.getEmail()}" style="text-align: center;">Email</td>
+                                    <td th:text="${student.getParentsNumber()}" style="text-align: center;">Parents Number</td>
+                                    <td th:text="${student.getFirstSemesterGrade()}" style="text-align: center;">Parents First Semester Grade</td>
+                                    <td th:text="${student.getSecondSemesterGrade()}" style="text-align: center;">Parents Second Semester Grade</td>
+                                    <td style="text-align: center;" >
+
+                                        <a sec:authorize="hasRole('super')" th:href="@{/students2/edit/{id}(id=${student.id})}"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit_student" th:data-id="${student.id}" >
+                                            <i class="fas fa-pencil-alt fa-xs"></i>
+                                        </a>
+                                        <!-- Absence button -->
+                                        <a th:href="@{/studentsAbsence/{id}(id=${student.id})}" class="btn btn-secondary btn-sm">
+                                            <i class="fas fa-clipboard fa-s"></i>
+                                        </a>
+                                        <!-- Delete button -->
+                                        <a sec:authorize="hasRole('super')" th:href="@{/students/delete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash-alt fa-xs"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="modal custom-modal fade" id="add_student" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Student</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/students2}" th:object="${student}" method="POST">
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student First Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{firstName}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student Last Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{lastName}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student Email <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{email}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student Parents Number <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{parentsNumber}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student First Semester Grade <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{firstSemesterGrade}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Student Second Semester Grade <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{secondSemesterGrade}">
+                                </div>
+                                <div class="submit-section">
+                                    <button class="btn btn-primary submit-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="modal custom-modal fade" id="edit_student" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Student</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editStudentForm" th:action="@{/students2/{id}}" th:object="${studentEdit}"  method="POST">
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student First Name <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{firstName}">
+                                    </div>
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student Last Name <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{lastName}">
+                                    </div>
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student Email <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{email}">
+                                    </div>
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student parents Number <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{parentsNumber}">
+                                    </div>
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student first Semester Grade <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{firstSemesterGrade}">
+                                    </div>
+                                    <div class="input-block mb-3">
+                                        <label class="col-form-label">Student second Semester Grade <span class="text-danger"></span></label>
+                                        <input class="form-control" type="text" th:field="*{secondSemesterGrade}">
+                                    </div>
+                                    <div class="submit-section">
+                                        <button class="btn btn-primary submit-btn">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script src="path/to/bootstrap.js"></script>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const editStudentModal = document.getElementById('edit_student');
+                        editStudentModal.addEventListener('show.bs.modal', function (event) {
+                            const button = event.relatedTarget; // Button that triggered the modal
+                            const studentId = button.getAttribute('data-id'); // Extract student ID from data-id attribute
+                            const form = document.getElementById('editStudentForm');
+
+                            // Update the form action URL with the correct student ID
+                            form.setAttribute('action', `/students2/${studentId}`);
+                        });
+                    });
+                </script>
+
+
+
+        </div>
+            <div >
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li th:class="${currentPage > 0}? 'page-item ': 'page-item disabled'">
+                            <a class="page-link"  th:href="@{/test(page=${currentPage - 1}, Search=${Search})}">Previous</a>
+                        </li>
+                        <li th:each="v,pageNumber: ${pages}" th:class="${pageNumber.index == currentPage}? 'page-item active': 'page-item'" ><a th:href="@{/test(page=${pageNumber.index},Search=${Search})}" class="page-link" th:text="${1+pageNumber.index}"></a></li>
+                        <li th:class="${currentPage < Tpages - 1}? 'page-item ': 'page-item disabled'">
+                            <a class="page-link" th:href="@{/test(page=${currentPage + 1}, Search=${Search})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+    </div>
+
+
+
+    <script th:src="@{assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+    <script th:src="@{assets/js/bootstrap.bundle.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+    <script th:src="@{assets/js/jquery.slimscroll.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+    <script th:src="@{assets/js/moment.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{assets/js/bootstrap-datetimepicker.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+    <script th:src="@{assets/js/layout.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{assets/js/theme-settings.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{assets/js/greedynav.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+    <script th:src="@{assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
+    </div>
+</body>
+
+
+</html>
