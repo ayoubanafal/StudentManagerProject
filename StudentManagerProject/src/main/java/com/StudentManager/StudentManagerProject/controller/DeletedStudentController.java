@@ -26,7 +26,7 @@ public class DeletedStudentController {
     @GetMapping("/deletedStudents")
     public String listStudents(Model model,
                                @RequestParam(name = "Search", defaultValue = "") String kw,
-                               @RequestParam(name = "size", defaultValue = "2") int size,
+                               @RequestParam(name = "size", defaultValue = "5") int size,
                                @RequestParam(name = "page", defaultValue = "0") int page) {
         Page<DeletedStudent> pageStudents = deletedStudentManager.findDeletedStudentByFirstFirstNameOrLastNameOrEmailOrDeletionReason(kw, page, size);
         model.addAttribute("students",pageStudents.getContent());

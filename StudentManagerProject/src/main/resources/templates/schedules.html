@@ -1,83 +1,209 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+    <meta name="description" content="SchoolManager - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, school , management">
+    <meta name="author" content="Ayoub Anafal - Bootstrap Admin Template">
+    <title>School Manager</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.png">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/material.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Student Management System</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="main-wrapper">
 
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/students}">Students</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/teachers}">Teachers</a>
+    <div class="header">
+
+        <div class="header-left">
+            <a class="logo"><img src="../assets/img/img_1.png" alt="Logo" width="45" height="45" ></a>
+            <a class="logo collapse-logo"><img src="../assets/img/img_1.png" width="20" height="20" alt="Logo"></a>
+            <a class="logo2"><img src="../assets/img/img_1.png" width="40" height="40" alt="Logo"></a>
+        </div>
+
+        <a id="toggle_btn" href="javascript:void(0);">
+<span class="bar-icon">
+<span></span>
+<span></span>
+<span></span>
+</span>
+        </a>
+
+        <div class="page-title-box">
+            <h3>School Manager</h3>
+        </div>
+
+        <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa-solid fa-bars"></i></a>
+
+        <ul class="nav user-menu">
+
+
+            <li class="nav-item dropdown has-arrow main-drop">
+                <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <span class="user-img"><img src="../assets/img/avatar/avatar-27.jpg" alt="User Image">
+                    <span class="status online"></span></span>
+                    <span>Admin</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                </div>
             </li>
         </ul>
+
+
+        <div class="dropdown mobile-user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="profile.html">My Profile</a>
+                <a class="dropdown-item" href="index.html">Logout</a>
+            </div>
+        </div>
+
     </div>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" th:href="@{/logout}" >Logout</a>
-        </li>
-    </ul>
-</nav>
-
-<div class="container-lg">
-    <div class="row">
-        <h1>Schedule</h1>
-    </div>
 
 
-    <div class="d-flex justify-content-around">
-        <div class="col-lg">
-            <a th:href="@{/ScheduleExportCSV/{id}(id=${id})}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+
+                <nav class="greedys sidebar-horizantal">
+                    <ul>
+                        <li class="menu-title">
+                            <span>Students</span>
+                        </li>
+                        <li class="submenu">
+                            <a th:href="@{/test}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a th:href="@{/test}">All Students</a></li>
+                                <li><a th:href="@{/deletedStudents}">Deleted Students</a></li>
+                            </ul>
+
+                        </li>
+                        <li class="menu-title">
+                            <span>Teachers</span>
+                        </li>
+                        <li class="submenu">
+                            <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a th:href="@{/teachers}">All Teachers</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <button class="viewmoremenu">More Menu</button>
+                </nav>
+
+                <ul class="sidebar-vertical">
+                    <li class="menu-title">
+                        <span>Students</span>
+                    </li>
+                    <li class="submenu">
+                        <a th:href="@{/test}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a th:href="@{/test}">All Students</a></li>
+                            <li><a th:href="@{/deletedStudents}">Deleted Students</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-title">
+                        <span>Teachers</span>
+                    </li>
+                    <li class="submenu">
+                        <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a th:href="@{/teachers}">All Teachers</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <table class="table table-striped table-bordered" style="text-align: center;">
-        <thead class="thead-dark">
-        <tr>
-            <th>Day</th>
-            <th>First Period</th>
-            <th>Second Period</th>
-            <th>Third Period</th>
-            <th>Fourth Period</th>
-            <th sec:authorize="hasRole('super')" style="width: 12%;">Actions</th>
-        </tr>
-        </thead>
+    <div class="page-wrapper" >
 
-        <tbody>
-        <tr th:each="schedule: ${schedules}">
-            <td th:text="${schedule.day}"></td>
-            <td th:text="${schedule.firstPeriod}"></td>
-            <td th:text="${schedule.secondPeriod}"></td>
-            <td th:text="${schedule.thirdPeriod}"></td>
-            <td th:text="${schedule.fourthPeriod}"></td>
-            <td sec:authorize="hasRole('super')" style="text-align: center;">
-                <a th:href="@{/schedules/edit/{id}(id=${schedule.idS})}" class="btn btn-primary btn-sm" >
-                    <i class="fas fa-pencil-alt fa-xs" ></i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="content container-fluid">
+
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Students List</h3>
+                    <a th:href="@{/ScheduleExportCSV/{id}(id=${id})}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table mb-0" style="text-align: center;">
+                        <thead >
+                        <tr>
+                            <th>Day</th>
+                            <th>First Period</th>
+                            <th>Second Period</th>
+                            <th>Third Period</th>
+                            <th>Fourth Period</th>
+                            <th sec:authorize="hasRole('super')" >Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="schedule: ${schedules}">
+                            <td th:text="${schedule.day}"></td>
+                            <td th:text="${schedule.firstPeriod}"></td>
+                            <td th:text="${schedule.secondPeriod}"></td>
+                            <td th:text="${schedule.thirdPeriod}"></td>
+                            <td th:text="${schedule.fourthPeriod}"></td>
+                            <td sec:authorize="hasRole('super')" style="text-align: center;">
+                                <a th:href="@{/schedulesEdit/{id}(id=${schedule.idS})}" class="btn btn-primary btn-sm" >
+                                    <i class="fas fa-pencil-alt fa-xs" ></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
+    <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+<script th:src="@{../assets/js/bootstrap.bundle.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+<script th:src="@{../assets/js/jquery.slimscroll.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+<script th:src="@{../assets/js/moment.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+<script th:src="@{../assets/js/bootstrap-datetimepicker.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+<script th:src="@{../assets/js/layout.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+<script th:src="@{../assets/js/theme-settings.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+<script th:src="@{../assets/js/greedynav.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+
+<script th:src="@{../assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+<script th:src="@{../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
+</div>
 </body>
+
+
 </html>

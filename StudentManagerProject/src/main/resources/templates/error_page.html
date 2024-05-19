@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>error page</title>
-    <link rel="stylesheet" href="css/style_error.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>
+<html
+        xmlns:th="http://www.thymeleaf.com/"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="template" lang="en">
+
 <body>
-<div id="main">
-    <div class="fof">
+<div layout:fragment="content" >
+    <div >
         <h1>You entered incorrect data please retry loging in again</h1>
         <a href="/login">Navigate to login</a>
     </div>

@@ -101,108 +101,53 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
-                <nav class="greedys sidebar-horizantal">
-                    <ul >
-                        <li class="menu-title">
-                            <span>Main</span>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
-                                <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
-                                <li><a href="deals-dashboard.html">Deals Dashboard</a></li>
-                                <li><a href="leads-dashboard.html">Leads Dashboard</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="chat.html">Chat</a></li>
-                                <li class="submenu">
-                                    <a href="#"><span> Calls</span> <span class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="voice-call.html">Voice Call</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="events.html">Calendar</a></li>
-                            </ul>
-                        </li>
 
+                <nav class="greedys sidebar-horizantal">
+                    <ul>
                         <li class="menu-title">
                             <span>Students</span>
                         </li>
                         <li class="submenu">
-                            <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                            <a th:href="@{/test}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
                             <ul>
                                 <li><a th:href="@{/test}">All Students</a></li>
+                                <li><a th:href="@{/deletedStudents}">Deleted Students</a></li>
                             </ul>
-                        </li>
 
+                        </li>
                         <li class="menu-title">
                             <span>Teachers</span>
                         </li>
                         <li class="submenu">
                             <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                             <ul>
-
                                 <li><a th:href="@{/teachers}">All Teachers</a></li>
                             </ul>
                         </li>
-
                     </ul>
                     <button class="viewmoremenu">More Menu</button>
-
                 </nav>
 
                 <ul class="sidebar-vertical">
-                    <li class="menu-title">
-                        <span>Main</span>
-                    </li>
-                    <li class="submenu">
-                        <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
-                        <ul>
-                            <li><a href="admin-dashboard.html">Admin Dashboard</a></li>
-                            <li><a href="employee-dashboard.html">Employee Dashboard</a></li>
-                            <li><a href="deals-dashboard.html">Deals Dashboard</a></li>
-                            <li><a href="leads-dashboard.html">Leads Dashboard</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu">
-                        <a href="#"><i class="la la-cube"></i> <span> Apps</span> <span class="menu-arrow"></span></a>
-                        <ul>
-                            <li><a href="chat.html">Chat</a></li>
-                            <li class="submenu">
-                                <a href="#"><span> Calls</span> <span class="menu-arrow"></span></a>
-                                <ul>
-                                    <li><a href="voice-call.html">Voice Call</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="events.html">Calendar</a></li>
-                        </ul>
-                    </li>
                     <li class="menu-title">
                         <span>Students</span>
                     </li>
                     <li class="submenu">
                         <a th:href="@{/test}" class="noti-dot"><i class="la la-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
                         <ul>
-
                             <li><a th:href="@{/test}">All Students</a></li>
+                            <li><a th:href="@{/deletedStudents}">Deleted Students</a></li>
                         </ul>
                     </li>
-
                     <li class="menu-title">
                         <span>Teachers</span>
                     </li>
                     <li class="submenu">
                         <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                         <ul>
-
                             <li><a th:href="@{/teachers}">All Teachers</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -220,7 +165,7 @@
                         <a th:href="@{/exportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a sec:authorize="hasRole('super')" th:href="@{/studentsAbsence/new/{id}(id=${id})}" class="btn add-btn" ><i class="fa-solid fa-plus"></i> Add Absence</a>
+                        <a sec:authorize="hasRole('super')" th:href="@{/studentsAbsenceNew/{id}(id=${id})}" class="btn add-btn" ><i class="fa-solid fa-plus"></i> Add Absence</a>
 
                     </div>
                 </div>
@@ -243,7 +188,7 @@
                                 <td th:text="${absence.missedClass}"></td>
                                 <td th:text="${absence.reason}"></td>
                                 <td sec:authorize="hasRole('super')" style="text-align: center;">
-                                    <a th:href="@{/studentsAbsence/edit/{id}(id=${absence.id})}" class="btn btn-primary btn-sm" >
+                                    <a th:href="@{/studentsAbsenceEdit/{id}(id=${absence.id})}" class="btn btn-primary btn-sm" >
                                         <i class="fas fa-pencil-alt fa-xs" ></i></a>
                                     <a th:href="@{/studentsAbsence/delete/{id}(id=${absence.id})}" class="btn btn-danger btn-sm" >
                                         <i class="fas fa-trash-alt fa-xs" ></i></a>
@@ -272,7 +217,8 @@
         </div>
     </div>
 
-
+    <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+    </div>
 
     <script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 

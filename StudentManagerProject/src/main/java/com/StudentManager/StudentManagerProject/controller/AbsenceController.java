@@ -44,7 +44,7 @@ public class AbsenceController {
     }
 
     ///////////new
-    @GetMapping("/studentsAbsence/new/{id}")
+    @GetMapping("/studentsAbsenceNew/{id}")
     public String StudentAbsenceForm(Model model, @PathVariable Long id) {
         Absence absence = new Absence();
         model.addAttribute("absence", absence);
@@ -63,7 +63,7 @@ public class AbsenceController {
     }
     ////update
 
-    @GetMapping("/studentsAbsence/edit/{id}")
+    @GetMapping("/studentsAbsenceEdit/{id}")
     public String editAbsenceForm(@PathVariable Long id, Model model) {
         model.addAttribute("absence", absenceManager.getAbsenceById(id));
         return "edit_absence";
@@ -73,12 +73,13 @@ public class AbsenceController {
                                 @ModelAttribute("absence") Absence absence) {
 
         Absence existingAbsence = absenceManager.getAbsenceById(id);
+        Long ids= existingAbsence.getStudent().getId();
         existingAbsence.setId(id);
         existingAbsence.setMissedClass(absence.getMissedClass());
         existingAbsence.setReason(absence.getReason());
         existingAbsence.setDate(absence.getDate());
         absenceManager.updateAbsence(existingAbsence);
-        return "redirect:/studentsAbsence/"+ id;
+        return "redirect:/studentsAbsence/"+ ids;
     }
     /////// delete
     @GetMapping("/studentsAbsence/delete/{id}")

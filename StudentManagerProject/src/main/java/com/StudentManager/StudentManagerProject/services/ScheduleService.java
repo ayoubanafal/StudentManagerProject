@@ -42,4 +42,9 @@ public class ScheduleService implements ScheduleManager {
     {
         return scheduleRepository.findScheduleByTeacherIdT(kw, PageRequest.of(size,page));
     }
+    @Override
+    public List<Schedule> findScheduleByTeacher(Long kw)
+    {
+        return scheduleRepository.findScheduleByTeacherIdT(kw);
+    }
 }

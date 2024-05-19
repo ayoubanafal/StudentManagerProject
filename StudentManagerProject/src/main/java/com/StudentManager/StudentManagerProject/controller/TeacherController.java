@@ -31,6 +31,8 @@ public class TeacherController {
                                @RequestParam(name = "Search", defaultValue = "") String kw,
                                @RequestParam(name = "size", defaultValue = "2") int size,
                                @RequestParam(name = "page", defaultValue = "0") int page) {
+        Teacher teacher = new Teacher();
+        model.addAttribute("teacher",teacher);
         Page<Teacher> pageTeachers = teacherManager.findTeacherByFirstNameOrLastNameOrEmail(kw,page,size);
         model.addAttribute("teachers",pageTeachers.getContent());
         System.out.println(pageTeachers.getTotalPages());
@@ -43,12 +45,14 @@ public class TeacherController {
     ////new
     @GetMapping("/teachers/new")
     public String createTeacherForm(Model model) {
+        List<Teacher> teachers = teacherManager.getAllTeachers();
+        model.addAttribute("teachers",teachers);
         Teacher teacher = new Teacher();
         model.addAttribute("teacher",teacher);
-        return "create_teacher";
+        return "teachers";
     }
 
-    @PostMapping("/teachers")
+    @PostMapping("/teachersn")
     public String saveTeacher(@ModelAttribute("teacher") Teacher teacher) {
         List<String> days = new ArrayList<>();
         days.add("Monday");
@@ -67,7 +71,7 @@ public class TeacherController {
         return "redirect:/teachers";
     }
     //////updating
-    @GetMapping("/teachers/edit/{id}")
+    @GetMapping("/teachersEdit/{id}")
     public String editTeacherForm(@PathVariable Long id, Model model) {
         model.addAttribute("teacher", teacherManager.getTeacherById(id));
         return "edit_teacher";
@@ -83,12 +87,17 @@ public class TeacherController {
         existingTeacher.setLastName(teacher.getLastName());
         existingTeacher.setEmail(teacher.getEmail());
         existingTeacher.setPhoneNumber(teacher.getPhoneNumber());
+        teacherManager.saveTeacher(existingTeacher);
         return "redirect:/teachers";
     }
     ////////////delete
     @GetMapping("/teachers/delete/{id}")
     public String deleteTeacherForm(@PathVariable Long id) {
         // i need to delete the schedule with the teacher
+        List<Schedule> schedules=scheduleManager.findScheduleByTeacher(id);
+        for (Schedule schedule : schedules) {
+            scheduleManager.deleteScheduleById(schedule.getIdS());
+        }
         teacherManager.deleteTeacherById(id);
         return "redirect:/teachers";
     }

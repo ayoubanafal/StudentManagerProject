@@ -5,10 +5,6 @@ import com.StudentManager.StudentManagerProject.dao.entities.Student;
 import com.StudentManager.StudentManagerProject.services.DeletedStudentManager;
 import com.StudentManager.StudentManagerProject.services.StudentManager;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 @Controller
@@ -94,7 +89,7 @@ public class Studentcontroller {
         return "redirect:/test";
     }
 //////updating
-    @GetMapping("/students/edit/{id}")
+    @GetMapping("/studentsEdit/{id}")
     public String editStudentForm(@PathVariable Long id, Model model) {
         model.addAttribute("student", studentManager.getStudentById(id));
         return "edit_student";
@@ -113,34 +108,13 @@ public class Studentcontroller {
         existingStudent.setFirstSemesterGrade(student.getFirstSemesterGrade());
         existingStudent.setSecondSemesterGrade(student.getSecondSemesterGrade());
         studentManager.updateStudent(existingStudent);
-        return "redirect:/students";
-    }
-    @GetMapping("/students2/edit/{id}")///2
-    public String editStudentForm2(@PathVariable Long id, Model model) {
-        model.addAttribute("studentEdit", studentManager.getStudentById(id));
-
-        return "redirect:/students2/"+id;
-    }
-    @PostMapping("/students2/{id}")///2
-    public String updateStudent2(@PathVariable Long id,
-                                @ModelAttribute("studentEdit") Student student) {
-
-        Student existingStudent = studentManager.getStudentById(id);
-        existingStudent.setId(id);
-        existingStudent.setFirstName(student.getFirstName());
-        existingStudent.setLastName(student.getLastName());
-        existingStudent.setEmail(student.getEmail());
-        existingStudent.setParentsNumber(student.getParentsNumber());
-        existingStudent.setFirstSemesterGrade(student.getFirstSemesterGrade());
-        existingStudent.setSecondSemesterGrade(student.getSecondSemesterGrade());
-        studentManager.updateStudent(existingStudent);
         return "redirect:/test";
     }
 ////////////delete
-    @GetMapping("/students/delete/{id}")
+    @GetMapping("/studentsDelete/{id}")
     public String deleteStudentForm(@PathVariable Long id, Model model) {
         model.addAttribute("student", studentManager.getStudentById(id));
-        return "delete_student";
+        return "deleteStudent";
     }
     @PostMapping("/studentsD/{id}")
     public String DStudent(@PathVariable Long id,
@@ -150,7 +124,7 @@ public class Studentcontroller {
         Dstudent.setDeletionReason(kw);
         deletedStudentManager.saveStudent(Dstudent);
         studentManager.deleteStudentById(id);
-        return "redirect:/students";
+        return "redirect:/test";
     }
 
     ////export

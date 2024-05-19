@@ -22,6 +22,10 @@ public class AdminController {
         model.addAttribute("loginRequest",new Admin());
         return "login_page";
     }
+    @GetMapping("/error_page")
+    public String getLoginPag(Model model) {
+        return "error_page";
+    }
     @PostMapping("/login")
     public String login(@ModelAttribute Admin admin,Model model)
     {

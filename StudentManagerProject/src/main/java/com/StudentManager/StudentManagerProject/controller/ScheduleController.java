@@ -37,7 +37,7 @@ public class ScheduleController {
         return "schedules";
     }
     ///update
-    @GetMapping("/schedules/edit/{id}")
+    @GetMapping("/schedulesEdit/{id}")
     public String editScheduleForm(@PathVariable Long id, Model model) {
         model.addAttribute("schedule", scheduleManager.getScheduleById(id));
         return "edit_schedule";

@@ -15,5 +15,7 @@ public interface ScheduleManager {
     public Schedule updateSchedule(Schedule schedule);
 
     public void deleteScheduleById(Long id);
+
+    public List<Schedule> findScheduleByTeacher(Long kw);
     public Page<Schedule> findScheduleByTeacher(Long kw , int page , int size);
 }

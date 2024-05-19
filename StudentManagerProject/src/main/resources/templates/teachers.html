@@ -1,120 +1,173 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
-    <link rel="stylesheet" href="../css/student.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<html
+        xmlns:th="http://www.thymeleaf.com/"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="template" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-</head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" >Student Management System</a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/students}">Students</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/deletedStudents}">Deleted Students</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/teachers}">Teachers</a>
-            </li>
-        </ul>
-    </div>
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-            <a class="nav-link active" th:href="@{/logout}" >Logout</a>
-        </li>
-    </ul>
-</nav>
-
-<div class="container-lg">
-    <div class="row">
-        <h1>Teachers List</h1>
-    </div>
 
 
-    <div class="d-flex justify-content-around">
-        <div class="col-lg">
-            <a sec:authorize="hasRole('super')" th:href="@{/teachers/new}" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus"></i> New Teacher</a>
-            <a th:href="@{/exportCSVT}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+<div layout:fragment="content" >
+
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Teachers List</h3>
+                        <a th:href="@{/exportCSVT}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+                    </div>
+                    <div class="col-auto float-end ms-auto">
+                        <a sec:authorize="hasRole('super')" th:href="@{/teachers/new}" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_teacher"><i class="fa-solid fa-plus"></i> Add Teacher</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped custom-table mb-0">
+                            <thead>
+                            <tr>
+                                <th style="text-align: center;">First Name</th>
+                                <th style="text-align: center;">Last Name</th>
+                                <th style="text-align: center;">Email</th>
+                                <th style="text-align: center;">Phone Number</th>
+                                <th style="text-align: center;">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="teacher : ${teachers}">
+                                <td th:text="${teacher.firstName}" style="text-align: center;">First Name</td>
+                                <td th:text="${teacher.lastName}" style="text-align: center;">Last Name</td>
+                                <td th:text="${teacher.email}" style="text-align: center;">Email</td>
+                                <td th:text="${teacher.phoneNumber}" style="text-align: center;">Phone Number</td>
+                                <td style="text-align: center;" >
+
+                                    <a sec:authorize="hasRole('super')" th:href="@{/teachersEdit/{id}(id=${teacher.idT})}"  class="btn btn-primary btn-sm"  >
+                                        <i class="fas fa-pencil-alt fa-xs"></i>
+                                    </a>
+                                    <!-- Absence button -->
+                                    <a th:href="@{/schedules/{id}(id=${teacher.idT})}" class="btn btn-secondary btn-sm">
+                                        <i> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                                        </svg> </i>
+                                    </a>
+                                    <!-- Delete button -->
+<!--                                    <a sec:authorize="hasRole('super')" th:href="@{/teachers/delete/{id}(id=${teacher.idT})}" class="btn btn-danger btn-sm">-->
+<!--                                        <i class="fas fa-trash-alt fa-xs"></i>-->
+<!--                                    </a>-->
+                                    <a sec:authorize="hasRole('super')"
+                                       href="javascript:void(0);"
+                                       class="btn btn-danger btn-sm"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#delete_teacher"
+                                       th:data-id="${teacher.idT}">
+                                        <i class="fas fa-trash-alt fa-xs"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal custom-modal fade" id="add_teacher" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Teacher</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form th:action="@{/teachersn}" th:object="${teacher}" method="POST">
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">First Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{firstName}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Last Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{lastName}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Email <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{email}">
+                                </div>
+                                <div class="input-block mb-3">
+                                    <label class="col-form-label">Phone Number <span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" th:field="*{phoneNumber}">
+                                </div>
+                                <div class="submit-section">
+                                    <button class="btn btn-primary submit-btn">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal custom-modal fade" id="delete_teacher" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="form-header">
+                                <h3>Delete Teacher</h3>
+                                <p>Are you sure you want to delete?</p>
+                            </div>
+                            <div class="modal-btn delete-action">
+                                <div class="row justify-content-center">
+                                    <div class="col-auto">
+                                        <a href="#" id="confirmDeleteBtn" class="btn btn-primary">Delete</a>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="#" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <script src="path/to/bootstrap.js"></script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Event listener for delete button click
+                            document.querySelectorAll('.btn-danger.btn-sm').forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const teacherId = this.getAttribute('data-id');
+                                    const deleteLink = document.getElementById('confirmDeleteBtn');
+                                    deleteLink.href = `/teachers/delete/${teacherId}`;
+                                });
+                            });
+                        });
+                    </script>
+
+
         </div>
-        <div class="col-lg-3">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2"
-                       type="search"
-                       placeholder="Search"
-                       aria-label="Search"
-                       name="Search"
-                       th:value="${Search}">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+        <div >
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li th:class="${currentPage > 0}? 'page-item ': 'page-item disabled'">
+                        <a class="page-link"  th:href="@{/teachers(page=${currentPage - 1}, Search=${Search})}">Previous</a>
+                    </li>
+                    <li th:each="v,pageNumber: ${pages}" th:class="${pageNumber.index == currentPage}? 'page-item active': 'page-item'" ><a th:href="@{/teachers(page=${pageNumber.index},Search=${Search})}" class="page-link" th:text="${1+pageNumber.index}"></a></li>
+                    <li th:class="${currentPage < Tpages - 1}? 'page-item ': 'page-item disabled'">
+                        <a class="page-link" th:href="@{/teachers(page=${currentPage + 1}, Search=${Search})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th style="width: 15%;">Actions</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="teacher: ${teachers}">
-            <td th:text="${teacher.firstName}"></td>
-            <td th:text="${teacher.lastName}"></td>
-            <td th:text="${teacher.email}"></td>
-            <td th:text="${teacher.phoneNumber}"></td>
-            <td  style="text-align: center;">
-                <a sec:authorize="hasRole('super')" th:href="@{/teachers/edit/{id}(id=${teacher.idT})}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-pencil-alt fa-xs"></i>
-                </a>
-                <a th:href="@{/schedules/{id}(id=${teacher.idT})}" class="btn btn-secondary btn-sm">
-                    <i> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
-                    </svg> </i>
-                </a>
-                <a sec:authorize="hasRole('super')" th:href="@{/teachers/delete/{id}(id=${teacher.idT})}" class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash-alt fa-xs"></i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div class="container fixed-bottom-nav">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li th:class="${currentPage > 0}? 'page-item ': 'page-item disabled'">
-                <a class="page-link"  th:href="@{/teachers(page=${currentPage - 1}, Search=${Search})}">Previous</a>
-            </li>
-            <li th:each="v,pageNumber: ${pages}" th:class="${pageNumber.index == currentPage}? 'page-item active': 'page-item'" ><a th:href="@{/teachers(page=${pageNumber.index},Search=${Search})}" class="page-link" th:text="${1+pageNumber.index}"></a></li>
-            <li th:class="${currentPage < Tpages - 1}? 'page-item ': 'page-item disabled'">
-                <a class="page-link" th:href="@{/teachers(page=${currentPage + 1}, Search=${Search})}">Next</a>
-            </li>
-        </ul>
-    </nav>
-
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
+
 </html>
