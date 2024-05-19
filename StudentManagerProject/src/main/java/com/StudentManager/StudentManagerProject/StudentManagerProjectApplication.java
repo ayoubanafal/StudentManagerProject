@@ -1,8 +1,5 @@
 package com.StudentManager.StudentManagerProject;
 
-import com.StudentManager.StudentManagerProject.dao.entities.Admin;
-import com.StudentManager.StudentManagerProject.dao.entities.Student;
-import com.StudentManager.StudentManagerProject.dao.repositories.AdminRepository;
 import com.StudentManager.StudentManagerProject.dao.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +15,7 @@ public class StudentManagerProjectApplication implements CommandLineRunner {
 
 	@Autowired
 	private StudentRepository studentRepository;
-	@Autowired
-	private AdminRepository adminRepository;
+	
 
 	@Override
 	public void run(String... args) throws Exception {

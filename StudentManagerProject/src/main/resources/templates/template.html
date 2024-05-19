@@ -22,7 +22,29 @@
     <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css}" rel="stylesheet">
 </head>
-<body>
+<body >
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-wrapper {
+        min-height: calc(100vh - 60px); /* Adjust 60px as per your footer height */
+        padding-bottom: 60px; /* Same height as footer to prevent content from overlapping */
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: transparent; /* Adjust background color as needed */
+        color: #0a0a0a; /* Adjust text color as needed */
+        padding: 15px;
+        text-align: center;
+    }
+</style>
 <div class="main-wrapper">
             <div class="header">
 
@@ -71,7 +93,9 @@
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                     <span class="user-img"><img th:src="@{assets/img/avatar/avatar-27.jpg}" alt="User Image">
                     <span class="status online"></span></span>
-                            <span>Admin</span>
+                            <span sec:authorize="hasRole('SUPER')">Super</span>
+                            <span sec:authorize="hasRole('ADMIN')">Admin</span>
+                            <span sec:authorize="hasRole('USER')">User</span>
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">My Profile</a>
@@ -116,6 +140,15 @@
                                         <li><a th:href="@{/teachers}">All Teachers</a></li>
                                     </ul>
                                 </li>
+                                <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                                    <span>Users</span>
+                                </li>
+                                <li sec:authorize="hasRole('SUPER')" class="submenu">
+                                    <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                                    <ul>
+                                        <li><a th:href="@{/users}">All Users</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                             <button class="viewmoremenu">More Menu</button>
                         </nav>
@@ -140,6 +173,15 @@
                                     <li><a th:href="@{/teachers}">All Teachers</a></li>
                                 </ul>
                             </li>
+                            <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                                <span>Users</span>
+                            </li>
+                            <li sec:authorize="hasRole('SUPER')" class="submenu">
+                                <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a th:href="@{/users}">All Users</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -147,8 +189,8 @@
 
         <div class="page-wrapper">
             <section layout:fragment="content"></section>
-        </div>
-        <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+            <div class="footer">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+            </div>
         </div>
 </div>
 <script th:src="@{assets/js/jquery-3.7.1.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>

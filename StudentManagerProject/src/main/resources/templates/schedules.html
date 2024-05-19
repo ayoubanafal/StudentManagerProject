@@ -58,7 +58,9 @@
                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                     <span class="user-img"><img src="../assets/img/avatar/avatar-27.jpg" alt="User Image">
                     <span class="status online"></span></span>
-                    <span>Admin</span>
+                    <span sec:authorize="hasRole('SUPER')">Super</span>
+                    <span sec:authorize="hasRole('ADMIN')">Admin</span>
+                    <span sec:authorize="hasRole('USER')">User</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">My Profile</a>
@@ -105,6 +107,15 @@
                                 <li><a th:href="@{/teachers}">All Teachers</a></li>
                             </ul>
                         </li>
+                        <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                            <span>Users</span>
+                        </li>
+                        <li sec:authorize="hasRole('SUPER')" class="submenu">
+                            <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a th:href="@{/users}">All Users</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <button class="viewmoremenu">More Menu</button>
                 </nav>
@@ -129,6 +140,15 @@
                             <li><a th:href="@{/teachers}">All Teachers</a></li>
                         </ul>
                     </li>
+                    <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                        <span>Users</span>
+                    </li>
+                    <li sec:authorize="hasRole('SUPER')" class="submenu">
+                        <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a th:href="@{/users}">All Users</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -141,7 +161,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="page-title">Students List</h3>
+                    <h3 class="page-title">Teacher Schedule</h3>
                     <a th:href="@{/ScheduleExportCSV/{id}(id=${id})}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
                 </div>
             </div>
@@ -158,7 +178,7 @@
                             <th>Second Period</th>
                             <th>Third Period</th>
                             <th>Fourth Period</th>
-                            <th sec:authorize="hasRole('super')" >Actions</th>
+                            <th sec:authorize="hasAnyRole('ADMIN','SUPER')" >Actions</th>
                         </tr>
                         </thead>
 
@@ -169,7 +189,7 @@
                             <td th:text="${schedule.secondPeriod}"></td>
                             <td th:text="${schedule.thirdPeriod}"></td>
                             <td th:text="${schedule.fourthPeriod}"></td>
-                            <td sec:authorize="hasRole('super')" style="text-align: center;">
+                            <td sec:authorize="hasAnyRole('ADMIN','SUPER')" style="text-align: center;">
                                 <a th:href="@{/schedulesEdit/{id}(id=${schedule.idS})}" class="btn btn-primary btn-sm" >
                                     <i class="fas fa-pencil-alt fa-xs" ></i></a>
                             </td>
@@ -184,24 +204,46 @@
     </div>
 
 </div>
-    <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+    <div class="footer" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
     </div>
 
-<script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 
-<script th:src="@{../assets/js/bootstrap.bundle.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/bootstrap.bundle.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 
-<script th:src="@{../assets/js/jquery.slimscroll.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/jquery.slimscroll.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 
-<script th:src="@{../assets/js/moment.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
-<script th:src="@{../assets/js/bootstrap-datetimepicker.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/moment.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/bootstrap-datetimepicker.min.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 
-<script th:src="@{../assets/js/layout.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
-<script th:src="@{../assets/js/theme-settings.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
-<script th:src="@{../assets/js/greedynav.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/layout.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/theme-settings.js}" type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../assets/js/greedynav.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
 
-<script th:src="@{../assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
-<script th:src="@{../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
+    <script th:src="@{../assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
+    <script th:src="@{../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-wrapper {
+            min-height: calc(100vh - 60px); /* Adjust 60px as per your footer height */
+            padding-bottom: 60px; /* Same height as footer to prevent content from overlapping */
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: transparent; /* Adjust background color as needed */
+            color: #0a0a0a; /* Adjust text color as needed */
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
 </div>
 </body>
 

@@ -53,6 +53,23 @@
 
         <ul class="nav user-menu">
 
+            <li class="nav-item">
+                <div class="top-nav-search">
+                    <a href="javascript:void(0);" class="responsive-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2"
+                               type="search"
+                               placeholder="Search"
+                               aria-label="Search"
+                               name="Search"
+                               th:value="${Search}">
+                        <br>
+                        <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </li>
 
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -154,62 +171,65 @@
         </div>
     </div>
 
-
-    <div class="page-wrapper">
+    <div class="page-wrapper" >
 
         <div class="content container-fluid">
 
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Student Absence Editing</h3>
+                        <h3 class="page-title">Users List</h3>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1 class="card-title text-center">Edit Absence</h1>
-                                    <form th:action="@{/studentsAbsence/edit/{id}(id=${id})}" th:object="${absence}" method="POST">
-                                        <div class="form-group">
-                                            <label for="date">Absence Date</label>
-                                            <input type="date" id="date" name="date" th:field="${absence.date}" class="form-control"
-                                                   placeholder="Enter Date" required/>
-                                            <small class="form-text text-danger" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Invalid date format</small>
-                                        </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped custom-table mb-0" style="text-align: center;">
+                            <thead >
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                            </thead>
 
-                                        <div class="form-group">
-                                            <label for="reason">Absence Reason</label>
-                                            <input type="text" id="reason" name="reason" th:field="*{reason}"
-                                                   class="form-control" placeholder="Enter Reason"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="missedClass">Missed Class</label>
-                                            <input type="text" id="missedClass" name="missedClass" th:field="*{missedClass}" class="form-control"
-                                                   placeholder="Missed Class"/>
-                                        </div>
-
-                                        <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                            <tbody>
+                            <tr th:each = "user : ${users}">
+                                <td th:text = "${user.firstName}"></td>
+                                <td th:text = "${user.lastName}"></td>
+                                <td th:text = "${user.email}"></td>
+                                <td>
+                                    <a  th:href="@{/changeRole3/{email}(email=${user.email})}" class="btn btn-secondary btn-sm" style="width: 65px;"> USER </a>
+                                    <a  th:href="@{/changeRole2/{email}(email=${user.email})}" class="btn btn-secondary btn-sm" >ADMIN</a>
+                                    <a  th:href="@{/changeRole1/{email}(email=${user.email})}" class="btn btn-secondary btn-sm" style="width: 65px;">SUPER</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
 
         </div>
+        <div >
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li th:class="${currentPage > 0}? 'page-item ': 'page-item disabled'">
+                        <a class="page-link"  th:href="@{/users(page=${currentPage - 1}, Search=${Search})}">Previous</a>
+                    </li>
+                    <li th:each="v,pageNumber: ${pages}" th:class="${pageNumber.index == currentPage}? 'page-item active': 'page-item'" ><a th:href="@{/users(page=${pageNumber.index},Search=${Search})}" class="page-link" th:text="${1+pageNumber.index}"></a></li>
+                    <li th:class="${currentPage < Tpages - 1}? 'page-item ': 'page-item disabled'">
+                        <a class="page-link" th:href="@{/users(page=${currentPage + 1}, Search=${Search})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-
-    <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+    <div class="footer" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
     </div>
 
     <script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
@@ -227,6 +247,28 @@
 
     <script th:src="@{../assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
     <script th:src="@{../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-wrapper {
+            min-height: calc(100vh - 60px); /* Adjust 60px as per your footer height */
+            padding-bottom: 60px; /* Same height as footer to prevent content from overlapping */
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: transparent; /* Adjust background color as needed */
+            color: #0a0a0a; /* Adjust text color as needed */
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
 </div>
 </body>
 

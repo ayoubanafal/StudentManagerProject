@@ -18,7 +18,7 @@
                             <a th:href="@{/exportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
                         </div>
                         <div class="col-auto float-end ms-auto">
-                            <a sec:authorize="hasRole('super')" th:href="@{/students22}" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_student"><i class="fa-solid fa-plus"></i> Add Student</a>
+                            <a sec:authorize="hasAnyRole('ADMIN','SUPER')" th:href="@{/students22}" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_student"><i class="fa-solid fa-plus"></i> Add Student</a>
 
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                     <td th:text="${student.getSecondSemesterGrade()}" style="text-align: center;">Parents Second Semester Grade</td>
                                     <td style="text-align: center;" >
 
-                                        <a sec:authorize="hasRole('super')" th:href="@{/studentsEdit/{id}(id=${student.id})}"  class="btn btn-primary btn-sm" >
+                                        <a sec:authorize="hasAnyRole('ADMIN','SUPER')" th:href="@{/studentsEdit/{id}(id=${student.id})}"  class="btn btn-primary btn-sm" >
                                             <i class="fas fa-pencil-alt fa-xs"></i>
                                         </a>
                                         <!-- Absence button -->
@@ -57,7 +57,7 @@
                                             <i class="fas fa-clipboard fa-s"></i>
                                         </a>
                                         <!-- Delete button -->
-                                        <a sec:authorize="hasRole('super')" th:href="@{/studentsDelete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
+                                        <a sec:authorize="hasAnyRole('ADMIN','SUPER')" th:href="@{/studentsDelete/{id}(id=${student.id})}" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash-alt fa-xs"></i>
                                         </a>
                                     </td>

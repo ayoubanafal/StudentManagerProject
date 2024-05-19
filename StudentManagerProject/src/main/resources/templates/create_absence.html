@@ -58,7 +58,9 @@
                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                     <span class="user-img"><img src="../assets/img/avatar/avatar-27.jpg" alt="User Image">
                     <span class="status online"></span></span>
-                    <span>Admin</span>
+                    <span sec:authorize="hasRole('SUPER')">Super</span>
+                    <span sec:authorize="hasRole('ADMIN')">Admin</span>
+                    <span sec:authorize="hasRole('USER')">User</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">My Profile</a>
@@ -105,6 +107,15 @@
                                 <li><a th:href="@{/teachers}">All Teachers</a></li>
                             </ul>
                         </li>
+                        <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                            <span>Users</span>
+                        </li>
+                        <li sec:authorize="hasRole('SUPER')" class="submenu">
+                            <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a th:href="@{/users}">All Users</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <button class="viewmoremenu">More Menu</button>
                 </nav>
@@ -127,6 +138,15 @@
                         <a th:href="@{/teachers}" class="noti-dot"><i class="la la-user"></i> <span> Teachers</span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li><a th:href="@{/teachers}">All Teachers</a></li>
+                        </ul>
+                    </li>
+                    <li sec:authorize="hasRole('SUPER')" class="menu-title">
+                        <span>Users</span>
+                    </li>
+                    <li sec:authorize="hasRole('SUPER')" class="submenu">
+                        <a th:href="@{/users}" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                            <li><a th:href="@{/users}">All Users</a></li>
                         </ul>
                     </li>
                 </ul>
