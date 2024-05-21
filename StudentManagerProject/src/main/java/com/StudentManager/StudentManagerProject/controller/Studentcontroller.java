@@ -49,24 +49,6 @@ public class Studentcontroller {
         return "test";
     }
 
-
-
-    @GetMapping("/students")
-    public String listStudents(Model model,
-                               @RequestParam(name = "Search", defaultValue = "") String kw,
-                               @RequestParam(name = "size", defaultValue = "2") int size,
-                               @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<Student> pageStudents = studentManager.findStudentByFirstNameOrLastNameOrEmail(kw, page, size);
-        model.addAttribute("students",pageStudents.getContent());
-        System.out.println("---------------------------");
-        System.out.println(pageStudents.getTotalPages());
-        System.out.println("---------------------------");
-        model.addAttribute("pages",new int[pageStudents.getTotalPages()]);
-        model.addAttribute("Tpages",pageStudents.getTotalPages());
-        model.addAttribute("currentPage",page);
-        model.addAttribute("Search",kw);
-        return "students";
-    }
 ////new
     @GetMapping("/students22")//2
     public String createStudentForm(Model model) {

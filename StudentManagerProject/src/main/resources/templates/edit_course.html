@@ -172,57 +172,71 @@
         </div>
     </div>
 
-    <div class="page-wrapper" >
 
-    <div class="content container-fluid">
+    <div class="page-wrapper">
 
-        <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h3 class="page-title">Teacher Schedule</h3>
-                    <a th:href="@{/ScheduleExportCSV/{id}(id=${id})}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Edit Course</h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped custom-table mb-0" style="text-align: center;">
-                        <thead >
-                        <tr>
-                            <th>Day</th>
-                            <th>First Period</th>
-                            <th>Second Period</th>
-                            <th>Third Period</th>
-                            <th>Fourth Period</th>
-                            <th sec:authorize="hasAnyRole('ADMIN','SUPER')" >Actions</th>
-                        </tr>
-                        </thead>
+            <div class="row">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form th:action="@{/courseUpdateG/{id}(id=${id})}" th:object="${course}" method="POST">
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="name">Course</label>
+                                            <input type="text" id="name" name="name" th:field="*{name}"
+                                                   class="form-control" placeholder="Enter Course Name"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="taughtBy">Taught By</label>
+                                            <select id="taughtBy" name="taughtBy" th:field="*{taughtBy}" class="form-control" required>
+                                                <option value="" disabled selected>Select a Professor</option>
+                                                <option th:each="teacher : ${teachers}" th:value="${teacher.firstName + ' ' + teacher.lastName}" th:text="${teacher.firstName + ' ' + teacher.lastName}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="weeklyHrs">Weekly Hours</label>
+                                            <input type="text" id="weeklyHrs" name="weeklyHrs" th:field="*{weeklyHrs}"
+                                                   class="form-control" placeholder="Enter Course Weekly Hours"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="year">Uni Year</label>
+                                            <select id="year" name="year" th:field="*{year}" class="form-control" required>
+                                                <option value="1" > First Year </option>
+                                                <option value="2" > Second Year </option>
+                                                <option value="3" > Third Year </option>
+                                                <option value="4" > Fourth Year </option>
+                                                <option value="5" > Fifth Year </option>
+                                            </select>
+                                        </div>
 
-                        <tbody>
-                        <tr th:each="schedule: ${schedules}">
-                            <td th:text="${schedule.day}"></td>
-                            <td th:text="${schedule.firstPeriod}"></td>
-                            <td th:text="${schedule.secondPeriod}"></td>
-                            <td th:text="${schedule.thirdPeriod}"></td>
-                            <td th:text="${schedule.fourthPeriod}"></td>
-                            <td sec:authorize="hasAnyRole('ADMIN','SUPER')" style="text-align: center;">
-                                <a th:href="@{/schedulesEdit/{id}(id=${schedule.idS})}" class="btn btn-primary btn-sm" >
-                                    <i class="fas fa-pencil-alt fa-xs" ></i></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
         </div>
-
-
     </div>
 
-</div>
-    <div class="footer" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
+    <div class="page-wrapper" align="center">&copy; copyright: School Manager 2024<br/> X - Casablanca- Morocco<br/> ayoubanafal2200@gmail.com
     </div>
 
     <script th:src="@{../assets/js/jquery-3.7.1.min.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
@@ -240,28 +254,6 @@
 
     <script th:src="@{../assets/js/app.js}"  type="df39114256e2f0a6a2a96ed6-text/javascript"></script>
     <script th:src="@{../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js}"  data-cf-settings="df39114256e2f0a6a2a96ed6-|49" defer></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .page-wrapper {
-            min-height: calc(100vh - 60px); /* Adjust 60px as per your footer height */
-            padding-bottom: 60px; /* Same height as footer to prevent content from overlapping */
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: transparent; /* Adjust background color as needed */
-            color: #0a0a0a; /* Adjust text color as needed */
-            padding: 15px;
-            text-align: center;
-        }
-    </style>
 </div>
 </body>
 

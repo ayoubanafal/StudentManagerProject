@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.com/"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="template" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+
+<div layout:fragment="content" >
+
+    <div class="content container-fluid">
+
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Courses</h3>
+                    <a th:href="@{/CourseExportCSV}" class="btn btn-success btn-sm mb-3"><i class="fas fa-download"></i> Download CSV</a>
+                </div>
+                <div class="col-auto float-end ms-auto">
+                    <a sec:authorize="hasAnyRole('ADMIN','SUPER')" th:href="@{/courseNewG}" class="btn add-btn" ><i class="fa-solid fa-plus"></i> Add Course</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table mb-0" style="text-align: center;">
+                        <thead>
+                        <tr>
+                            <th >Name</th>
+                            <th >Taught By Professor</th>
+                            <th >Hours Weekly</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="course : ${courses}">
+                            <td th:text="${course.name}">Name</td>
+                            <td th:text="${course.taughtBy}">Taught By Professor</td>
+                            <td th:text="${course.weeklyHrs}" >Hours Weekly</td>
+                            <td>
+
+                                <a sec:authorize="hasAnyRole('ADMIN','SUPER')" th:href="@{/courseUpdateG/{id}(id=${course.idC})}"   class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt fa-xs"></i>
+                                </a>
+                                <a sec:authorize="hasAnyRole('ADMIN','SUPER')"  th:href="@{/courseDelete/{id}(id=${course.idC})}"  class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt fa-xs"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+<!--    <div >-->
+<!--        <nav aria-label="Page navigation example">-->
+<!--            <ul class="pagination justify-content-center">-->
+<!--                <li th:class="${currentPage > 0}? 'page-item ': 'page-item disabled'">-->
+<!--                    <a class="page-link"  th:href="@{/course(page=${currentPage - 1}, Search=${Search})}">Previous</a>-->
+<!--                </li>-->
+<!--                <li th:each="v,pageNumber: ${pages}" th:class="${pageNumber.index == currentPage}? 'page-item active': 'page-item'" ><a th:href="@{/course(page=${pageNumber.index},Search=${Search})}" class="page-link" th:text="${1+pageNumber.index}"></a></li>-->
+<!--                <li th:class="${currentPage < Tpages - 1}? 'page-item ': 'page-item disabled'">-->
+<!--                    <a class="page-link" th:href="@{/course(page=${currentPage + 1}, Search=${Search})}">Next</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </div>-->
+</div>
+
+</body>
+
+
+</html>
